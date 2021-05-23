@@ -26,7 +26,7 @@ public class AdminMessageDomain {
     @Column(name = "question_id")
     private int questionId;
     private String name;
-    private int id;
+    private int user;
     private String message;
     @Column(columnDefinition="DATETIME")
     @JsonProperty("message_time")

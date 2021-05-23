@@ -2,7 +2,6 @@ package com.seo.app.GeneralDiscussion.controller;
 
 import com.seo.app.GeneralDiscussion.domain.AdminMessageDomain;
 import com.seo.app.GeneralDiscussion.domain.DiscussionDomain;
-import com.seo.app.GeneralDiscussion.domain.ReplyDomain;
 import com.seo.app.GeneralDiscussion.dto.DiscussionDto;
 import com.seo.app.GeneralDiscussion.dto.MessageDto;
 import com.seo.app.GeneralDiscussion.dto.ReplyDto;
@@ -60,5 +59,11 @@ public class DiscussionController {
     public ReplyDto replyMessage(@RequestParam(value = "reply_to") int replyTo){
         log.info("POST Call received at Reply/reply to User" + replyTo);
         return replyService.getReply(replyTo);
+    }
+
+    @RequestMapping(value = "/user/message", method = RequestMethod.POST)
+    public MessageDto userMessage(@RequestParam(value = "user") int user){
+        log.info("POST Call received at msg/msg to Admin" + user);
+        return adminMessageService.getMessage(user);
     }
 }

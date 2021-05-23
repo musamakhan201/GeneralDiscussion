@@ -12,4 +12,5 @@ public class ReplyDto {
     private int reply_to;
     private String name;
     private String message;
+    private String time;
 }

@@ -35,6 +35,7 @@ public class ReplyService {
         replyDto.setName(replyDomain.getName());
         replyDto.setReply_to(replyDomain.getReplyTo());
         replyDto.setMessage(replyDomain.getMessage());
+        replyDto.setTime(replyDomain.getMessageTime());
         return replyDto;
     }
 }

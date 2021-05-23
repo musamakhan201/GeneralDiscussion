@@ -8,8 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageDto {
-    private int message_id;
+    private int question_id;
     private String name;
     private int id;
     private String message;
+    private String time;
 }

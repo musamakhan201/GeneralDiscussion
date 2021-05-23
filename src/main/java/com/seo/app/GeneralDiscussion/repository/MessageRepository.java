@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MessageRepository extends JpaRepository<AdminMessageDomain,Integer> {
+    AdminMessageDomain findByUser(int user);
 }

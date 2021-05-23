@@ -20,7 +20,7 @@ public class AdminMessageService {
         String response;
         AdminMessageDomain adminMessageDomain=new AdminMessageDomain();
         adminMessageDomain.setName(messageDto.getName());
-        adminMessageDomain.setId(messageDto.getId());
+        adminMessageDomain.setUser(messageDto.getId());
         adminMessageDomain.setMessage(messageDto.getMessage());
         messageRepository.save(adminMessageDomain);
         response="Message Send";
@@ -30,5 +30,18 @@ public class AdminMessageService {
 
     public Iterable<AdminMessageDomain> getMessage() {
         return messageRepository.findAll();
+    }
+
+    public MessageDto getMessage(int user)
+    {
+        AdminMessageDomain messageDomain=messageRepository.findByUser(user);
+        MessageDto messageDto=new MessageDto();
+        messageDto.setQuestion_id(messageDomain.getQuestionId());
+        messageDto.setId(messageDomain.getUser());
+        messageDto.setMessage(messageDomain.getMessage());
+        messageDto.setName(messageDomain.getName());
+        messageDto.setMessage(messageDomain.getMessage());
+        messageDto.setTime(messageDomain.getMessageTime());
+        return messageDto;
     }
 }
