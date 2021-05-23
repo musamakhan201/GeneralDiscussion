@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AdminMessageService {
 
@@ -32,16 +35,20 @@ public class AdminMessageService {
         return messageRepository.findAll();
     }
 
-    public MessageDto getMessage(int user)
+    public List<MessageDto> getMessage(int user)
     {
-        AdminMessageDomain messageDomain=messageRepository.findByUser(user);
-        MessageDto messageDto=new MessageDto();
-        messageDto.setQuestion_id(messageDomain.getQuestionId());
-        messageDto.setUser(messageDomain.getUser());
-        messageDto.setMessage(messageDomain.getMessage());
-        messageDto.setName(messageDomain.getName());
-        messageDto.setMessage(messageDomain.getMessage());
-        messageDto.setTime(messageDomain.getMessageTime());
-        return messageDto;
+        List<AdminMessageDomain> messageDomain=messageRepository.findByUser(user);
+        ArrayList<MessageDto> messageList=new ArrayList<>();
+        for(int i=0;i<messageDomain.size();i++) {
+            MessageDto messageDto=new MessageDto();
+            messageDto.setQuestion_id(messageDomain.get(i).getQuestionId());
+            messageDto.setUser(messageDomain.get(i).getUser());
+            messageDto.setMessage(messageDomain.get(i).getMessage());
+            messageDto.setName(messageDomain.get(i).getName());
+            messageDto.setMessage(messageDomain.get(i).getMessage());
+            messageDto.setTime(messageDomain.get(i).getMessageTime());
+            messageList.add(messageDto);
+        }
+        return messageList;
     }
 }

@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("seo")
 public class DiscussionController {
@@ -56,13 +58,13 @@ public class DiscussionController {
     }
 
     @RequestMapping(value = "/get/reply", method = RequestMethod.POST)
-    public ReplyDto replyMessage(@RequestParam(value = "reply_to") int replyTo){
+    public List<ReplyDto> replyMessage(@RequestParam(value = "reply_to") int replyTo){
         log.info("POST Call received at Reply/reply to User" + replyTo);
         return replyService.getReply(replyTo);
     }
 
     @RequestMapping(value = "/user/message", method = RequestMethod.POST)
-    public MessageDto userMessage(@RequestParam(value = "user") int user){
+    public List<MessageDto> userMessage(@RequestParam(value = "user") int user){
         log.info("POST Call received at msg/msg to Admin" + user);
         return adminMessageService.getMessage(user);
     }

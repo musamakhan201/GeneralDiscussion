@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ReplyService {
     private final Logger log = LoggerFactory.getLogger(ReplyService.class);
@@ -27,15 +30,19 @@ public class ReplyService {
         log.info(responseMessage);
         return responseMessage;
     }
-    public ReplyDto getReply(int replyTo)
+    public List<ReplyDto> getReply(int replyTo)
     {
-        ReplyDomain replyDomain=replyRepository.findByReplyTo(replyTo);
-        ReplyDto replyDto=new ReplyDto();
-        replyDto.setReply_id(replyDomain.getReplyId());
-        replyDto.setName(replyDomain.getName());
-        replyDto.setReply_to(replyDomain.getReplyTo());
-        replyDto.setMessage(replyDomain.getMessage());
-        replyDto.setTime(replyDomain.getMessageTime());
-        return replyDto;
+        List<ReplyDomain> replyDomain=replyRepository.findByReplyTo(replyTo);
+        ArrayList<ReplyDto> list=new ArrayList<>();
+        for(int i=0;i<replyDomain.size();i++) {
+            ReplyDto replyDto = new ReplyDto();
+            replyDto.setReply_id(replyDomain.get(i).getReplyId());
+            replyDto.setName(replyDomain.get(i).getName());
+            replyDto.setReply_to(replyDomain.get(i).getReplyTo());
+            replyDto.setMessage(replyDomain.get(i).getMessage());
+            replyDto.setTime(replyDomain.get(i).getMessageTime());
+            list.add(replyDto);
+        }
+        return list;
     }
 }
