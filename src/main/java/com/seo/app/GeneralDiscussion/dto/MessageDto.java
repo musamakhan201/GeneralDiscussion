@@ -10,7 +10,7 @@ import lombok.*;
 public class MessageDto {
     private int question_id;
     private String name;
-    private int id;
+    private int user;
     private String message;
     private String time;
 }
